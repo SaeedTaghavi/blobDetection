@@ -1,0 +1,3 @@
+https://towardsdatascience.com/image-processing-with-python-blob-detection-using-scikit-image-5df9a8380ade
+https://pythonexamples.org/python-opencv-read-image-cv2-imread/
+https://www.kite.com/python/answers/how-get-the-rgb-values-of-an-image-using-pil-in-python
