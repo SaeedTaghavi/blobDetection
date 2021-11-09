@@ -1,11 +1,23 @@
 import tkinter
 import tkinter.messagebox
-top = tkinter.Tk()
+import tkinter.filedialog
 
+win = tkinter.Tk()
+filename=""
 def helloCallBack():
    tkinter.messagebox.showinfo( "Hello Python", "Hello World")
 
-B = tkinter.Button(top, text ="Hello", command = helloCallBack)
+def findRedBlob():
+   tkinter.messagebox.showinfo( "Hello Python", "Hello World")
 
-B.pack()
-top.mainloop()
+def selectVideo():
+   filename = tkinter.filedialog.askopenfilename(filetypes=[("video files", "*.mp4"),("video files", "*.MP4"),("All files", "*.*")])
+   print(filename)
+
+C = tkinter.Button(win, text ="select video", command = selectVideo)
+B = tkinter.Button(win, text ="Hello", command = findRedBlob)
+
+# C.pack()
+# B.pack()
+
+win.mainloop()

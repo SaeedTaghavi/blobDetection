@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 # read the image
-fullPath='./frames/frame10.jpg'
+fullPath='./frames/frame0.jpg'
 image = cv2.imread(fullPath)
 
 # B, G, R channel splitting
