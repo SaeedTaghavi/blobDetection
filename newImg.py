@@ -3,6 +3,9 @@ import  math
 import numpy as np
 import cv2
 
+
+# def find_the_boggest_contour(contour):
+
 # read the image
 fullPath='./frames/frame0.jpg'
 image = cv2.imread(fullPath)
@@ -39,7 +42,7 @@ cv2.drawContours(image=image_contour_green, contours=contours2, contourIdx=-1, c
 
 # detect contours using red channel and without thresholding
 # ret, thresh1 = cv2.threshold(blue, 50, 255, cv2.THRESH_BINARY_INV)
-ret, thresh = cv2.threshold(blue, 45, 255, cv2.THRESH_BINARY_INV)
+ret, thresh = cv2.threshold(blue, 50, 255, cv2.THRESH_BINARY_INV)
 ret, threshr = cv2.threshold(red, 50, 255, cv2.THRESH_BINARY)
 threshm = thresh*threshr
 # cv2.imshow("r",threshr)
@@ -49,10 +52,32 @@ threshm = thresh*threshr
 # ret, thresh = cv2.threshold(red, 110, 120, cv2.THRESH_BINARY)
 contours3, hierarchy3 = cv2.findContours(image=threshm, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE)
 print("num contours: ",len(contours3))
+c = max(contours3, key = cv2.contourArea)
+area = cv2.contourArea(c)
+perimeter = cv2.arcLength(c,True)
+M = cv2.moments(c)
+if M["m00"] != 0:
+    cX = int(M["m10"] / M["m00"])
+    cY = int(M["m01"] / M["m00"])
+else:
+    cX, cY = 0, 0
+
+
+
+# print(contours3)
 # draw contours on the original image
 image_contour_red = image.copy()
-cv2.drawContours(image=image_contour_red, contours=contours3, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
+cv2.drawContours(image=image_contour_red, contours=c, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
 # see the results
+cv2.circle(image_contour_red, (cX, cY), 5, (255, 255, 255), -1)   #center of mass contour
+# x,y,w,h = cv2.boundingRect(c)
+# cv2.rectangle(image_contour_red,(x,y),(x+w,y+h),(0,255,0),2)
+# rect = cv2.minAreaRect(c)
+# box = cv2.boxPoints(rect)
+# box = np.int0(box)
+# cv2.drawContours(image_contour_red,[box],0,(0,0,255),2)
+# ellipse = cv2.fitEllipse(c)
+# cv2.ellipse(image_contour_red,ellipse,(0,255,0),2)
 cv2.imshow(fullPath, image_contour_red)
 cv2.waitKey(0)
 cv2.imwrite('red_channel.jpg', image_contour_red)
