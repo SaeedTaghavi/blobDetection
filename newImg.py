@@ -1,7 +1,6 @@
 import cv2
 import  math
 import numpy as np
-import cv2
 
 
 # def find_the_boggest_contour(contour):
