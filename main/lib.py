@@ -77,8 +77,8 @@ def loop_over_all_frames(filePath):
     f = open(centerFile, "a")
     numFrames = count_total_frames(filePath)
     # print("numFrames: ",numFrames)
-    # for iFrame in range(numFrames):
-    for iFrame in range(100):
+    for iFrame in range(numFrames):
+    # for iFrame in range(100):
         frame = get_frame_from_video(filePath,iFrame)
         if (frame is not None ):
             x,y = findCM(frame)
